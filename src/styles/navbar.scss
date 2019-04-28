@@ -1,0 +1,35 @@
+    .navBar {
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        border-bottom: 3px solid grey;
+    .textLogo {
+        padding-left: 50px;
+        padding-right: 50px;
+        span {
+            padding-left: 20px;
+        }
+    }
+    .nav {
+        display:inline-block;
+        margin:0;
+        padding:0;
+        padding-left: 40px;
+
+    }
+    .item {
+        display: inline-block;
+    
+      button {
+        margin: 0;
+        padding: 10px;
+        cursor: crosshair;
+        color: grey;
+        background-color: white;
+        &:hover { color:white; background:grey;}
+         border: none;
+         font-family:  'Nunito', sans-serif;
+         font-size: 14px;
+      }
+   }
+}
