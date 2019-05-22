@@ -1,9 +1,9 @@
 import React from 'react';
 import Propertycard from './propertycard';
+import '../styles/properties.scss';
 
 const Properties = () => (
   <div>
-      Properties Page
     <Propertycard
       title="Flat"
       type="1 Bed Flat"
