@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/addproperty.scss';
 import axios from 'axios';
+import Alert from './Alert';
 
 class AddProperty extends Component {
   state={
@@ -13,16 +14,32 @@ class AddProperty extends Component {
       city: 'Manchester',
       email: '',
     },
+    alertMessage: '',
+    isSuccess: false,
+    isError: false,
   };
 
   handleAddProperty = event => {
     event.preventDefault();
+    this.setState({
+      alertMessage: '',
+      isSuccess: false,
+      isError: false,
+    });
     axios.post('http://localhost:3000/api/v1/PropertyListing/', this.state.fields)
+      .then(() => this.setState({
+        isSuccess: true,
+        alertMessage: 'Property added.',
+      }))
       .then(function (response) {
         console.log(response);
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
+        this.setState({
+          alertMessage: 'Server error. Please try again later.',
+          isError: true,
+        });
       });
     console.log(this.state.fields);
   };
@@ -38,9 +55,12 @@ class AddProperty extends Component {
   render() {
     return (
       <div className="AddProperty">
+        {this.state.isSuccess && <Alert message={this.state.alertMessage} success />}
+        {this.state.isError && <Alert message={this.state.alertMessage} />}
         <form onSubmit={this.handleAddProperty}>
-          <div><input name="title" placeholder="name of property" onChange={this.handleFieldChange} value={this.state.fields.title} required /></div>
+          <div><span className="title">Name of property</span><input name="title" placeholder="name of property" onChange={this.handleFieldChange} value={this.state.fields.title} required /></div>
           <div>
+            <span className="title">Type of property</span>
             <select name="type" onChange={this.handleFieldChange} value={this.state.fields.type} >
               <option value="Flat">Flat</option>
               <option value="Detached">Detached</option>
@@ -51,10 +71,11 @@ class AddProperty extends Component {
               <option value="Bungalow">Bungalow</option>
             </select>
           </div>
-          <div><input type="number" name="bedrooms" placeholder="Number of bedrooms" onChange={this.handleFieldChange} value={this.state.fields.bedrooms} required /></div>
-          <div><input type="number" name="bathrooms" placeholder="Number of bathrooms" onChange={this.handleFieldChange} value={this.state.fields.bathrooms} required /></div>
-          <div><input type="number" name="price" placeholder="Cost of house" onChange={this.handleFieldChange} value={this.state.fields.price} required /></div>
+          <div><span className="title">Number of bedrooms</span><input type="number" name="bedrooms" placeholder="Number of bedrooms" onChange={this.handleFieldChange} value={this.state.fields.bedrooms} required /></div>
+          <div><span className="title">Number of bathrooms</span><input type="number" name="bathrooms" placeholder="Number of bathrooms" onChange={this.handleFieldChange} value={this.state.fields.bathrooms} required /></div>
+          <div><span className="title">Cost of house</span><input type="number" name="price" placeholder="Cost of house" onChange={this.handleFieldChange} value={this.state.fields.price} required /></div>
           <div>
+            <span className="title">Location</span>
             <select name="type" onChange={this.handleFieldChange} value={this.state.fields.city}>
               <option value="Manchester">Manchester</option>
               <option value="Leeds">Leeds</option>
@@ -62,8 +83,8 @@ class AddProperty extends Component {
               <option value="Liverpool">Liverpool</option>
             </select>
           </div>
-          <div><input type="email" name="email" placeholder="email address" onChange={this.handleFieldChange} value={this.state.fields.email} required /></div>
-          <button type="submit"> Add Form </button>
+          <div><span className="title">Email</span><input type="email" name="email" placeholder="email address" onChange={this.handleFieldChange} value={this.state.fields.email} required /></div>
+          <span className="title">Submit property</span><button className="button" type="submit"> Add property </button>
         </form>
       </div>
     );
