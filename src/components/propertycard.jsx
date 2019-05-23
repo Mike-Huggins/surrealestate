@@ -8,8 +8,7 @@ library.add(faHome, faPoundSign, faBed, faBath, faEnvelope);
 
 const Propertycard = props => (
   <div className="propertyCard">
-    <div className="propertyCardIcon"><FontAwesomeIcon icon="home" /></div>
-    <div className="title">{props.title} - {props.city}</div>
+    <div className="Propertycardimage"><FontAwesomeIcon icon="home" /><span className="head">{props.title} - {props.city}</span></div>
     <div className="type">{props.type}</div>
     <div className="bedrooms"><FontAwesomeIcon id="bedIcon" icon="bed" />{props.bedrooms}</div>
     <div className="bathrooms"><FontAwesomeIcon id="bathIcon" icon="bath" />{props.bathrooms}</div>

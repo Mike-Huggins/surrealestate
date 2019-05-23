@@ -1,3 +1,64 @@
-.title {
+.col {
+    display: inline-block;
+    width: 33.33%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+  }
 
+.propertyCard{
+    border-width: 2px;
+    border-style: solid;
+    border-color: darkgray;
+    margin: 10px;
+    width: 100%;
+}
+
+.Propertycardimage{
+    padding-top: 25px;
+    width: 100%;
+    background-color: rgb(151, 148, 144);
+    text-align: center;
+    padding-bottom: 50px;
+    padding: 3px;
+    padding-right: 0px;
+    padding-left: 0px;
+    .head {
+        padding-left: 10px;
+    }
+}
+
+.type {
+    padding: 3px;
+    width: 100%;
+    text-align: center;   
+}
+
+.bedrooms {
+    padding: 3px;
+    width: 100%;
+    text-align: center;   
+}
+
+.bathrooms {
+    padding: 3px;
+    width: 100%;
+    text-align: center;   
+}
+
+.price {
+    padding: 3px;
+    width: 100%;
+    text-align: center;   
+}
+
+.email {
+    padding: 3px;
+    width: 100%;
+    text-align: center;  
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
 }

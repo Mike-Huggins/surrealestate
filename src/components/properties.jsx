@@ -1,19 +1,40 @@
 import React from 'react';
 import Propertycard from './propertycard';
 import '../styles/properties.scss';
+import axios from 'axios';
 
-const Properties = () => (
-  <div>
-    <Propertycard
-      title="Flat"
-      type="1 Bed Flat"
-      bedrooms="1"
-      bathrooms="1"
-      price="1"
-      city="Manchester"
-      email="test@mcr.com"
-    />
-  </div>
-);
+class Properties extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      properties: [],
+      alert: '',
+      error: false,
+    };
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:3000/api/v1/PropertyListing')
+      .then((response) => this.setState({ properties: response.data }))
+      .catch(() => {
+        this.setState({
+          alert: 'Oops something went wrong.',
+          error: true,
+        });
+      });
+  }
+
+  render() {
+    return (
+      <div>
+        <span className="error">{this.state.alert}</span>
+        {this.state.properties.map(property => (
+          <div key={property._id} className="col">
+            <Propertycard key={property._id} {...property} />
+          </div>
+        ))}
+      </div>);
+  }
+}
 
 export default Properties;

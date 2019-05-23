@@ -8,7 +8,7 @@ const NavBar = () => (
     <div className="textLogo">
       <FontAwesomeIcon icon="home" /><span>Surreal Estate</span>
       <ul className="nav">
-        <Link to="/" className="item">View Properites</Link>
+        <Link to="/" className="item">View Properties</Link>
         <Link to="/addproperty" className="item">Add a Property</Link>
       </ul>
     </div>
