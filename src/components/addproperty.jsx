@@ -61,7 +61,7 @@ class AddProperty extends Component {
           <div><span className="title">Name of property</span><input name="title" placeholder="name of property" onChange={this.handleFieldChange} value={this.state.fields.title} required /></div>
           <div>
             <span className="title">Type of property</span>
-            <select name="type" onChange={this.handleFieldChange} value={this.state.fields.type} >
+            <select name="type" onChange={this.handleFieldChange} value={this.state.fields.type}>
               <option value="Flat">Flat</option>
               <option value="Detached">Detached</option>
               <option value="Semi-Detached">Semi-Detached</option>
@@ -76,7 +76,7 @@ class AddProperty extends Component {
           <div><span className="title">Cost of house</span><input type="number" name="price" placeholder="Cost of house" onChange={this.handleFieldChange} value={this.state.fields.price} required /></div>
           <div>
             <span className="title">Location</span>
-            <select name="type" onChange={this.handleFieldChange} value={this.state.fields.city}>
+            <select name="city" onChange={this.handleFieldChange} value={this.state.fields.city}>
               <option value="Manchester">Manchester</option>
               <option value="Leeds">Leeds</option>
               <option value="Sheffield">Sheffield</option>

@@ -31,3 +31,12 @@
     font-size: 14px;
     &:hover { color:white; background:grey;}
 }
+
+a{
+    text-decoration: none; 
+}
+
+a:visited{
+    text-decoration:none;
+    color:grey;
+}
