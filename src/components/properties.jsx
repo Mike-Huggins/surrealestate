@@ -12,8 +12,17 @@ class Properties extends React.Component {
       properties: [],
       alert: '',
       error: false,
+      search: '',
     };
   }
+
+  handleSearch = event => {
+    event.preventDefault();
+    const { search } = this.state;
+    const newQueryString = this.buildQueryString('query', { title: { $regex: search } });
+    const { history } = this.props;
+    history.push(newQueryString);
+  };
 
   componentDidMount() {
     axios.get('http://localhost:3000/api/v1/PropertyListing')
@@ -31,7 +40,10 @@ class Properties extends React.Component {
     const currentQueryParams = qs.parse(search, { ignoreQueryPrefix: true });
     const newQueryParams = {
       ...currentQueryParams,
-      [operation]: JSON.stringify(valueObj),
+      [operation]: JSON.stringify({
+        ...JSON.parse(currentQueryParams[operation] || '{}'),
+        ...valueObj,
+      }),
     };
     return qs.stringify(newQueryParams, { addQueryPrefix: true, encode: false });
   };
@@ -49,7 +61,11 @@ class Properties extends React.Component {
     return (
       <div>
         <div className="sidenav">
-          <span className="filterTitle">Filter By Location:</span>
+          <form onSubmit={this.handleSearch}>
+            <input placeholder="Search..." type="text" value={this.state.search} onChange={event => this.setState({ search: event.target.value })} />
+            <button className="searchsubmit" type="submit" value="submit">Search</button>
+          </form>
+          <div className="filterTitle">Filter By Location:</div>
           <Link className="filterLink" to={this.buildQueryString('query', { city: 'Manchester' })}>Manchester</Link>
           <Link className="filterLink" to={this.buildQueryString('query', { city: 'Leeds' })}>Leeds</Link>
           <Link className="filterLink" to={this.buildQueryString('query', { city: 'Sheffield' })}>Sheffield</Link>
