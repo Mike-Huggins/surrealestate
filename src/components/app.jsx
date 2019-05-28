@@ -11,14 +11,38 @@ import { Switch, Route } from 'react-router-dom';
 
 library.add(faHome);
 
-const App = () => (
-  <React.Fragment>
-    <NavBar />
-    <Switch>
-      <Route exact path="/" component={Properties} />
-      <Route exact path="/addproperty" component={AddProperty} />
-    </Switch>
-  </React.Fragment>
-);
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userId: null,
+    };
+  }
+
+  handleLogin = (response) => {
+    this.setState({ userId: response.userID });
+  };
+
+  handleLogout = () => {
+    window.FB.logout();
+    this.setState({ userId: null });
+  };
+
+  render() {
+    return (
+      <React.Fragment>
+        <NavBar
+          onLogin={this.handleLogin}
+          userId={this.state.userId}
+          logOut={this.handleLogout}
+        />
+        <Switch>
+          <Route exact path="/" component={Properties} />
+          <Route exact path="/addproperty" component={AddProperty} />
+        </Switch>
+      </React.Fragment>
+    );
+  }
+}
 
 export default App;
